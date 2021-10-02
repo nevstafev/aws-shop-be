@@ -23,6 +23,7 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      SQS_URL: '${cf:product-service-dev.sqsUrl}',
     },
     lambdaHashingVersion: '20201221',
     iamRoleStatements: [
@@ -35,6 +36,11 @@ const serverlessConfiguration: AWS = {
         Effect: 'Allow',
         Action: 's3:*',
         Resource: 'arn:aws:s3:::node-shop-uploaded/*',
+      },
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource: ['${cf:product-service-dev.sqsArn}'],
       },
     ],
   },

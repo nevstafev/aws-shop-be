@@ -20,6 +20,7 @@ export class ApiController {
           .request({
             method: req.method,
             url: `${recipientUrl}${req.originalUrl}`,
+            ...(Object.keys(req.body).length > 0 ? { data: req.body } : {}),
           })
           .toPromise();
 

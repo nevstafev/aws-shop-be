@@ -4,8 +4,8 @@ import { Request, Response } from 'express';
 import { Method } from 'axios';
 import { ParamsDictionary } from 'express-serve-static-core';
 
-const getUrlWithoutPrefix = (url: string, urlPrefix: string): string => {
-  if (urlPrefix.length === 0) {
+const getUrlWithoutPrefix = (url: string, urlPrefix: string | null): string => {
+  if (!urlPrefix || urlPrefix.length === 0) {
     return url;
   }
   return url.split(`${urlPrefix}/`)[1];

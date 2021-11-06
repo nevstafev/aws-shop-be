@@ -11,7 +11,7 @@ export class ApiController {
     @Req() req: Omit<Request, 'method'> & { method: Method },
     @Res() res: Response,
   ) {
-    const recipientParam = req.params[0].split('/')[0];
+    const recipientParam = req.originalUrl.split('/')[1];
     const recipientUrl = process.env[recipientParam];
 
     if (recipientUrl) {
@@ -23,6 +23,7 @@ export class ApiController {
           .request({
             method: req.method,
             url,
+            validateStatus: () => true,
             ...(Object.keys(req.body).length > 0 ? { data: req.body } : {}),
           })
           .toPromise();

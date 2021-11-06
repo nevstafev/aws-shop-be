@@ -13,7 +13,7 @@ import { Cache } from 'cache-manager';
 
 const isCacheable = (req: Request): boolean => {
   const urlPats = req.originalUrl.split('/');
-  if (urlPats.length !== 2 && req.method === 'GET') {
+  if (urlPats.length !== 2 || req.method !== 'GET') {
     return false;
   }
   const recipient = urlPats[1];

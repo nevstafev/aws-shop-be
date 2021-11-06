@@ -16,10 +16,13 @@ export class ApiController {
 
     if (recipientUrl) {
       try {
+        const url = `${recipientUrl}${req.originalUrl}`;
+        console.log(`Calling url ${url}`);
+
         const apiResponse = await this.httpService
           .request({
             method: req.method,
-            url: `${recipientUrl}${req.originalUrl}`,
+            url,
             ...(Object.keys(req.body).length > 0 ? { data: req.body } : {}),
           })
           .toPromise();

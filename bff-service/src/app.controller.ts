@@ -38,10 +38,7 @@ export class ApiController {
         const apiResponse = await this.httpService
           .request({
             method: req.method,
-            url: `${recipientUrl}/${getUrlWithoutPrefix(
-              req.originalUrl,
-              process.env.URL_PREFIX,
-            )}`,
+            url: `${recipientUrl}${req.originalUrl}`,
             ...(Object.keys(req.body).length > 0 ? { data: req.body } : {}),
           })
           .toPromise();
